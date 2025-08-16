@@ -1,0 +1,10 @@
+hostname: ai-elevate-dev-rancher.binhql.com
+replicas: 1
+
+service:
+  type: NodePort
+  annotations: {}
+  disableHTTP: false
+
+nodePortHttp: 30100
+nodePortHttps: 30101

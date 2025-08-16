@@ -1,0 +1,29 @@
+mode: standalone
+replicas: 1
+
+minioAPIPort: 9000
+service:
+  type: ClusterIP
+  clusterIP: ~
+  port: 9000
+  nodePort: 30200
+
+minioConsolePort: 9001
+consoleService:
+  type: ClusterIP
+  clusterIP: ~
+  port: 9001
+  nodePort: 30201
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 2Gi
+
+resources:
+  limits:
+    cpu: 2
+    memory: 2Gi
+  requests:
+    cpu: 1
+    memory: 1Gi

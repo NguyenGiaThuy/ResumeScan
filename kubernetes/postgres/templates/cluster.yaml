@@ -1,0 +1,28 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ .Values.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  instances: {{ .Values.cluster.instances }}
+  logLevel: {{ .Values.cluster.logLevel }}
+  primaryUpdateStrategy: {{ .Values.cluster.primaryUpdateStrategy }}
+  
+  superuserSecret:
+    name: {{ .Values.superuserSecret.name }}
+
+  bootstrap:
+    initdb:
+      database: {{ .Values.database.name }}
+      owner: {{ .Values.database.user }}
+{{- if .Values.postInitSQL.enabled }}
+      postInitSQL:
+{{- range .Values.postInitSQL.queries }}
+        - {{ . | quote }}
+{{- end }}
+{{- end }}
+  
+  storage:
+    size: {{ .Values.cluster.storage.size }}
+  walStorage:
+    size: {{ .Values.cluster.walStorage.size }}

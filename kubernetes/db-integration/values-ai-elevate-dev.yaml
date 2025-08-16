@@ -1,0 +1,25 @@
+namespace: ai-elevate-dev
+
+image:
+  tag: 0.0.3
+
+env:
+  CHROMA_HOST: "chromadb.ai-elevate-dev.svc.cluster.local"
+  CHROMA_PORT: "8000"
+  POSTGRES_HOST: "postgres-rw.ai-elevate-dev.svc.cluster.local"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "langgraph_db"
+  SECRET_USER_FILE: /secrets/postgres_user.txt
+  SECRET_PASSWORD_FILE: /secrets/postgres_password.txt
+  CONFIG_FILE: /configs/ai-elevate-dev.json
+
+configMap:
+  name: db-integration-config
+  mountPath: "/configs"
+  configFile:
+    name: "ai-elevate-dev.json"
+    path: "configs/ai-elevate-dev.json"
+
+secret:
+  name: db-integration-secret
+  mountPath: "/secrets"

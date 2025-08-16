@@ -1,0 +1,31 @@
+namespace: ai-elevate-dev
+
+image:
+  tag: 0.0.6
+
+env:
+  MINIO_ENDPOINT_URL: minio-api.ai-elevate-dev.svc.cluster.local:9000
+  MINIO_BUCKET_NAME: ai-elevate-bucket
+  MINIO_REGION_NAME: us-east-1
+  MINIO_OBJECT_KEY: default-resume.pdf
+  MINIO_USE_SSL: false
+  OPENAI_ENDPOINT: https://api.openai.com/v1
+  OPENAI_MODEL: GPT-4o-mini
+
+secretEnv:
+  MINIO_ACCESS_KEY:
+    key: minio_access_key
+    from: minio-credentials
+  MINIO_SECRET_KEY:
+    key: minio_secret_key
+    from: minio-credentials
+  OPENAI_CHATBOT_API_KEY:
+    key: openai_chatbot_api_key
+    from: openai-credentials
+  OPENAI_EMBEDDING_API_KEY:
+    key: openai_embedding_api_key
+    from: openai-credentials
+
+configs: []
+
+secrets: []

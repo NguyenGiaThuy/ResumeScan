@@ -1,0 +1,16 @@
+image:
+  repository: itzmanish/ecr-token-renew
+  pullPolicy: IfNotPresent
+  tag: v0.1.0
+
+namespace: ai-elevate-dev
+configMapKeyRef: ecr-token-renew-aws-configs
+dockerSecretName: ecr-registry
+dockerRegistries: 058264469194.dkr.ecr.ap-southeast-1.amazonaws.com
+nameOverride: ecr-token-renew
+fullnameOverride: ecr-token-renew
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""

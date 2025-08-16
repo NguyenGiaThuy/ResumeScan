@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Values.name }}-config"
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.name }}
+    version: {{ .Values.image.tag }}
+data:
+  {{ .Values.configMap.configFile.name }}: |
+{{ .Files.Get .Values.configMap.configFile.path | indent 4 }}

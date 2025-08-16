@@ -1,0 +1,6 @@
+apiVersion: v2
+name: matching
+description: A Helm chart for Matching service - JD and Resume matching AI service
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

@@ -1,0 +1,27 @@
+name: postgres
+
+namespace: ai-elevate-dev
+
+database:
+  name: langgraph_db
+  user: app
+
+superuserSecret:
+  name: postgres-superuser-secret
+
+cluster:
+  instances: 3
+  logLevel: info
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 1Gi
+  walStorage:
+    size: 1Gi
+
+postInitSQL:
+  enabled: true
+  queries:
+    - CREATE DATABASE IF NOT EXISTS appdb;
+    - CREATE DATABASE IF NOT EXISTS langgraph_db;
+    - GRANT ALL PRIVILEGES ON DATABASE appdb TO app;
+    - GRANT ALL PRIVILEGES ON DATABASE langgraph_db TO app;

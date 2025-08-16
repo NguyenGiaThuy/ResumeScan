@@ -1,0 +1,77 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Scrape the OpenTelemetry Collector metrics endpoint
+  - job_name: "otel-collector"
+    static_configs:
+      - targets: ["otel-collector:8888"]
+    metrics_path: /metrics
+
+  # Scrape OTEL Collector Prometheus exporter for application metrics
+  - job_name: "otel-prometheus-exporter"
+    static_configs:
+      - targets: ["otel-collector:8889"]
+    metrics_path: /metrics
+
+  # Scrape Grafana metrics
+  - job_name: "grafana"
+    static_configs:
+      - targets: ["grafana:3000"]
+    metrics_path: /metrics
+
+  # Scrape Redis metrics (if Redis exporter is available)
+  - job_name: "redis"
+    static_configs:
+      - targets: ["redis:6379"]
+    metrics_path: /metrics
+
+  # Scrape PostgreSQL metrics (if postgres_exporter is available)
+  # - job_name: "postgres"
+  #   static_configs:
+  #     - targets: ["postgres:5432"]
+
+  # Scrape ChromaDB metrics (if available)
+  - job_name: "chroma"
+    static_configs:
+      - targets: ["chroma:8000"]
+    metrics_path: /metrics
+
+  # Scrape application metrics
+  - job_name: "chatbox"
+    static_configs:
+      - targets: ["chatbox:8501"]
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  - job_name: "db-integration"
+    static_configs:
+      - targets: ["db-integration:8088"]
+    metrics_path: /metrics
+    scrape_interval: 30s
+
+  # Scrape Docker daemon metrics (if enabled)
+  # - job_name: "docker"
+  #   static_configs:
+  #     - targets: ["host.docker.internal:9323"]
+
+# Alertmanager configuration
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#           # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+# rule_files:
+#   - "alert_rules.yml"

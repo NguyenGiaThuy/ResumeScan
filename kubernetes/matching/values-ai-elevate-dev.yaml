@@ -1,0 +1,18 @@
+namespace: ai-elevate-dev
+
+image:
+  tag: 0.0.1
+
+env:
+  CONFIG_FILE: configs/ai-elevate-dev.json
+
+secretEnv:
+  AWS_ACCESS_KEY_ID:
+    key: "aws_access_key"
+    from: "aws-credentials"
+  AWS_SECRET_ACCESS_KEY:
+    key: "aws_secret_key"
+    from: "aws-credentials"
+  AWS_DEFAULT_REGION:
+    key: "aws_region"
+    from: "aws-credentials"

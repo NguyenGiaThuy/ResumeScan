@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+*.env
+.env.*
+docker-compose.override.yml
+
+# Build output
+dist/
+build/
+*.egg-info/
+
+# Editor files
+.idea/
+.vscode/
+*.swp
+
+# Database files
+*.sqlite3
+*.db
+
+# Others
+*.bak
+*.tmp

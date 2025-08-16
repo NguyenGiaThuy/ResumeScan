@@ -1,0 +1,17 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="common_modules",
+    version="0.1",
+    packages=find_packages(),
+    install_requires=[
+        "langchain==0.3.27",
+        "pydantic==2.11.7",
+        "langchain-openai==0.3.29",
+        "langchain-community==0.3.27",
+        "langchain-huggingface==0.3.1",
+        "langchain-google-genai==2.1.9",
+        "langchain_aws==0.2.30",
+        "langchain-deepseek==0.1.4",
+    ],
+)

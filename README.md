@@ -1,101 +1,98 @@
-# ResumeScan: AI-Powered Resume & JD Analyzer
+# AI Elevate
 
-ResumeScan is a Streamlit web application that leverages AI to analyze a candidate's resume against a job description (JD). It provides a match score, a summary of alignment, and a list of missing skills. If the match is strong, it automatically generates a set of tailored interview questions.
+An Intelligent CV-JD Matching & Interview Platform.
 
-A key feature of this tool is the **interactive question refiner**. After the initial questions are generated, you can chat with an AI agent to modify them, providing additional context or requesting specific changes to better suit the interview's focus.
+AI Elevate is a comprehensive monorepo containing microservices for AI-powered recruitment solutions. The platform provides intelligent CV-JD matching, automated interview generation, and interactive chat capabilities using modern AI technologies.
 
----
+## 1. Features
 
-## 🚀 Core Features
+- **Smart CV-JD Matching**: Automatically match candidates' resumes with job descriptions using AI-powered analysis
+- **Automated Interview Generation**: Generate relevant interview questions and real-time conversation with AI interviewer based on resume content and job requirements
+- **Multi-Agent Architecture**: LangGraph-based workflow orchestration for complex AI tasks
+- **Kubernetes Ready**: Complete Helm charts for production deployment
+- **Observability**: OpenTelemetry integration with Zipkin tracing and Prometheus/Grafana monitoring
 
--   **📄 Resume Upload**: Supports resumes in PDF format.
--   **📂 JD Selection**: Select a Job Description from a list of markdown files.
--   **🤖 AI-Powered Analysis**:
-    -   **Match Score**: A percentage indicating how well the resume matches the JD.
-    -   **Profile Summary**: A brief overview of the candidate's alignment with the role.
-    -   **Missing Skills**: A list of key skills required by the JD but not found in the resume.
--   **❓ Automatic Question Generation**: If the match score is 75% or higher, the tool generates a set of interview questions.
--   **💬 Interactive Question Refinement**: A chat interface allows you to provide feedback to an AI agent to refine and regenerate the interview questions in real-time.
+## 2. High-Level Architecture
 
----
+![docs/architecture/ai-elevate-architecture.png](docs/architecture/ai-elevate-architecture.png)
 
-## 🛠️ Tech Stack
+## 3. Quick Start
 
--   **Backend**: Python
--   **Frontend**: Streamlit
--   **AI Orchestration**: LangGraph
--   **Language Model**: Google Gemini API
--   **PDF Parsing**: `pdfplumber`
+### 3.1. Prerequisites
 
----
+- Docker and Docker Compose
+- Python 3.8+
+- AWS credentials (for Bedrock access)
+- OpenAI API key (for graph processing)
 
-## ⚙️ How to Run
+### 3.2. Local Development
 
-### 1. Prerequisites
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/AI-Elevate-Org/ai-elevate-monorepo.git
+   cd ai-elevate-monorepo
+   ```
 
--   Python 3.8+
--   `uv` (or `pip`) for package management.
+2. **Set up environment variables**:
+   ```bash
+   # Create .env file in apps/graph/
+   cp apps/graph/.env.example apps/graph/.env
 
-### 2. Installation
+   # Edit with your API keys and configurations
+   ```
 
-Clone the repository and install the required packages:
+3. **Start infrastructure services**:
+   ```bash
+   cd compose
+   docker compose up -d --build --remove-orphans
+   ```
+
+4. **Access services**:
+   - **Chatbox**: http://localhost:8501
+   - **DB Integration API**: http://localhost:8088
+   - **Grafana**: http://localhost:3000
+   - **Zipkin**: http://localhost:9411
+   - **Adminer**: http://localhost:8080
+
+### 3.3. Kubernetes
+
+Use the provided Helm charts for Kubernetes with DEV environment:
 
 ```bash
-git clone <repository-url>
-cd ResumeScan
-uv venv
-uv pip install -r requirements.txt
+cd kubernetes
+./deploy-ai-elevate-dev.sh
 ```
 
-### 3. API Key Configuration
+## 4. API Documentation
 
-Create a secrets file at `.streamlit/secrets.toml` and add your Google Gemini API key:
+### 4.1. Database Integration API
 
-```toml
-# .streamlit/secrets.toml
-GOOGLE_API_KEY = "YOUR_API_KEY_HERE"
-GOOGLE_MODEL_NAME = "gemini-1.5-flash"
-```
+The FastAPI service provides comprehensive API documentation at:
+- **Swagger UI**: http://localhost:8088/docs
 
-### 4. Run the Application
+## 5. Development
 
-```bash
-streamlit run main.py
-```
+### 5.1. Adding New Services
 
-The application will open in your web browser.
+1. Create service directory in `apps/`
+2. Add Dockerfile and requirements
+3. Update `docker-compose.yaml`
+4. Create Kubernetes Helm chart
+5. Add to deployment scripts
+
+### 6. Testing
+
+### 7. Monitoring and Observability
+
+- **Traces**: View in Zipkin at http://localhost:9411
+- **Metrics**: Prometheus at http://localhost:9090
+- **Dashboards**: Grafana at http://localhost:3000
+- **Logs**: Docker logs or Kubernetes logs
+
+## 8. License
+
+This project is for internal use only. All rights reserved.
 
 ---
 
-## 🕹️ How to Use
-
-1.  **Upload a Resume**: Use the file uploader to select a PDF resume.
-2.  **Select a JD**: Choose a job description from the dropdown menu.
-3.  **Analyze**: Click the "Analyze Resume" button. The analysis results will be displayed.
-4.  **Refine Questions**: If questions are generated, a chat box will appear. Type your instructions to the AI to modify the questions and press Enter. The questions will be updated based on your feedback.
-
----
-
-## 📂 Project Structure
-
-```
-ResumeScan/
-├── main.py                 # The main Streamlit application file
-├── app/
-│   ├── graph.py            # Defines the LangGraph agents and workflow
-│   ├── processor.py        # Core logic for analysis and question refinement
-│   ├── parser.py           # Utility functions for parsing AI model outputs
-│   └── utils.py            # Helper functions (e.g., text extraction)
-├── documents/
-│   └── JD/                 # Contains the job descriptions in .md format
-├── prompts/                # Example prompts (not directly used in the app)
-├── .streamlit/secrets.toml # For API key storage (you need to create this)
-├── .streamlit/config.toml  # For Streamlit configuration (you need to create this)
-└── requirements.txt        # Python package dependencies
-```
-
-.streamlit/config.toml content
-```toml
-[server]
-runOnSave = false
-```
+Built with ❤️ by the AI Elevate team.

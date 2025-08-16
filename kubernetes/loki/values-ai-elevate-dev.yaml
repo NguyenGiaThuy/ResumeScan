@@ -1,0 +1,68 @@
+loki:
+  auth_enabled: false
+  storage:
+    bucketNames:
+      chunks: ai-elevate-dev-logs
+      ruler: ai-elevate-dev-logs
+      admin: ai-elevate-dev-logs
+  schemaConfig:
+    configs:
+      - from: 2025-08-11
+        store: tsdb
+        object_store: filesystem
+        schema: v13
+        index:
+          prefix: index_
+          period: 24h
+  commonConfig:
+    replication_factor: 1
+
+singleBinary:
+  persistence:
+    size: 1Gi
+
+write:
+  replicas: 1
+  persistence:
+    size: 1Gi
+
+read:
+  replicas: 1
+  persistence:
+    size: 1Gi
+
+backend:
+  replicas: 1
+  persistence:
+    size: 1Gi
+
+ingester:
+  persistence:
+    size: 1Gi
+
+index_gateway:
+  persistence:
+    size: 1Gi
+
+compactor:
+  persistence:
+    size: 1Gi
+
+bloomGateway:
+  persistence:
+    size: 1Gi
+
+patternIngester:
+  persistence:
+    size: 1Gi
+
+ruler:
+  persistence:
+    size: 1Gi
+
+resultsCache:
+  persistence:
+    size: 1Gi
+
+chunksCache:
+  enabled: false

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV-JD Matcher & Interview</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+  <body>
+    <header class="saas-header">
+      <div class="brand-logo">
+        <img src="https://cdn.jsdelivr.net/gh/saasify/assets/saasify-logo.svg" alt="Logo" height="36"/>
+        <span class="brand-title">AI Elevate</span>
+      </div>
+      <nav class="saas-nav">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a href="#login" class="login-btn">Login</a>
+        <a href="#signup" class="signup-btn">Sign Up</a>
+      </nav>
+    </header>
+    <div class="container saas-theme">
+      <div class="hero-section">
+        <h1>AI-Powered CV & JD Matching & Interview Platform</h1>
+        <p class="hero-desc">Accelerate your hiring process with smart candidate-job matching and automated interview Q&A. <br>Batch process, insightful analytics, and a seamless chat experience—just like top SaaS HR tools.</p>
+      </div>
+      <div class="main-flex">
+        <div class="left-panel">
+          <form id="upload-form">
+            <div class="file-inputs batch-inputs">
+              <label>Upload CV(s):
+                <input type="file" id="cv-file" name="cv" accept=".pdf,.docx,.txt" multiple required>
+              </label>
+              <label>Upload JD(s):
+                <input type="file" id="jd-file" name="jd" accept=".pdf,.docx,.txt" multiple required>
+              </label>
+            </div>
+            <button type="submit" class="primary-btn">Batch Match & Start Interview</button>
+          </form>
+          <div id="results" class="hidden">
+            <h2>Matching Results</h2>
+            <div id="batch-table"></div>
+            <div id="score"></div>
+            <div id="score-breakdown"></div>
+            <div id="questions-section" class="hidden">
+              <h3>Interview Questions</h3>
+              <div id="questions-list"></div>
+              <div id="qa-interface"></div>
+            </div>
+          </div>
+          <div id="feedback" class="hidden"></div>
+        </div>
+        <div class="right-panel">
+          <div class="chatbox-panel">
+            <h2>Interviewer Chat</h2>
+            <div id="chatbox-messages"></div>
+            <div class="chatbox-input-row">
+              <input type="text" id="chatbox-input" placeholder="Type your message...">
+              <button id="chatbox-send">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="saas-footer">
+      <div>© 2025 AI Elevate. Inspired by leading SaaS HR solutions.</div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>

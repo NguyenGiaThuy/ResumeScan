@@ -1,0 +1,33 @@
+namespace: ai-elevate-dev
+
+image:
+  tag: 0.0.1
+
+env:
+  CONFIG_FILE: configs/ai-elevate-dev.json
+  MATCHING_SERVICE_URL: http://matching.ai-elevate-dev.svc.cluster.local:8001
+
+secretEnv:
+  AWS_ACCESS_KEY_ID:
+    key: "aws_access_key"
+    from: "aws-credentials"
+  AWS_SECRET_ACCESS_KEY:
+    key: "aws_secret_key"
+    from: "aws-credentials"
+  AWS_DEFAULT_REGION:
+    key: "aws_region"
+    from: "aws-credentials"
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+  hosts:
+    - host: ai-elevate-dev.binhql.com
+      paths:
+        - path: /
+          pathType: Prefix

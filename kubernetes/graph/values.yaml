@@ -1,0 +1,44 @@
+name: graph
+
+replicaCount: 1
+
+image:
+  repository: 058264469194.dkr.ecr.ap-southeast-1.amazonaws.com
+  name: ai-elevate/graph
+
+imagePullPolicy: IfNotPresent
+imagePullSecrets:
+  - name: ecr-registry
+
+service:
+  type: ClusterIP
+  port: 8000
+  targetPort: 8000
+
+env: {}
+#   EXAMPLE_VAR: "example_value"
+
+secretEnv: {}
+#   SECRET_VAR:
+#     key: "secret_key_name"
+#     from: "secret_name"
+
+configs: []
+#   - name: "configmap-name-1"
+#     mountPath: "/path/to/mount/1"
+#   - name: "configmap-name-2"
+#     mountPath: "/path/to/mount/2"
+
+secrets: []
+#   - name: "secret-name-1"
+#     mountPath: "/path/to/mount/1"
+#   - name: "secret-name-2"
+#     mountPath: "/path/to/mount/2"
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
